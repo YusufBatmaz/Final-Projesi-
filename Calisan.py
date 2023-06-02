@@ -2,6 +2,7 @@ from Insan import Insan
 
 
 class Calisan(Insan):
+    # Değişkenlere göre Initializer metot veriliyor
     def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas):
         super().__init__(tc_no, ad, soyad, yas, cinsiyet, uyruk)
         self.__sektor = self.kontrol_sektor(sektor)
@@ -9,6 +10,7 @@ class Calisan(Insan):
         self.__maas = maas
         self.__yeni_maas = ""
 
+    # Gerekli değişkenler için get/set metotları verilen kısım
     def get_sektor(self):
         return self.__sektor
 
@@ -33,6 +35,7 @@ class Calisan(Insan):
     def set_yeni_maas(self, yeni_maas):
         self.__yeni_maas = yeni_maas
 
+    # Çalışanın zam hakkını hesaplayan zam_hakki metodu
     def zam_hakki(self):
         try:
             if self.__tecrube / 12 < 2:
@@ -51,6 +54,8 @@ class Calisan(Insan):
         except Exception as e:
             print("Hata:", str(e))
 
+    # Kullanıcının sektör bilgisininin doğru girdiğini kontrol eden kısım. "teknoloji", "muhasebe", "inşaat"
+    # dışındaki bütün sektörleri "diğer" şeklinde yazar
     def kontrol_sektor(self, sektor):
         sektorler = ["teknoloji", "muhasebe", "inşaat", "diğer"]
         if sektor in sektorler:
@@ -58,6 +63,8 @@ class Calisan(Insan):
         else:
             return "diğer"
 
+    # ad, soyad, tecrübe ve yeni maaşı bilgilerini yazdıran method
     def __str__(self):
         self.zam_hakki()
-        return f"Ad: {self.get_ad()}\nSoyad: {self.get_soyad()}\nTecrübe: {self.__tecrube} ay\nYeni Maaş: {self.__yeni_maas}"
+        return f"Ad: {self.get_ad()}\nSoyad: {self.get_soyad()}\nTecrübe: {self.__tecrube} ay" \
+               f"\nYeni Maaş: {self.__yeni_maas}"
