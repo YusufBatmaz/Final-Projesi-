@@ -2,11 +2,13 @@ from Insan import Insan
 
 
 class Issiz(Insan):
+    # Değişkene göre Initializer metot veriliyor
     def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, mavi_statu, beyaz_statu, yonetici_statu):
         super().__init__(tc_no, ad, soyad, yas, cinsiyet, uyruk)
         self.__tecrube_dict = {"mavi yaka": mavi_statu, "beyaz yaka": beyaz_statu, "yönetici": yonetici_statu}
         self.__statu = ""
 
+    # Değişkenler için get/set metotları verilen kısım
     def get_tecrube_dict(self):
         return self.__tecrube_dict
 
@@ -19,6 +21,7 @@ class Issiz(Insan):
     def set_statu(self, statu):
         self.__statu = statu
 
+    # En uygun statünün bulunması için statu_bul metodu
     def statu_bul(self):
         try:
             max_etki = 0
@@ -41,6 +44,9 @@ class Issiz(Insan):
             print("Hata:", str(e))
             return ""
 
+    # __str__ metotu içinde kullanıcının ad, soyadı ve dictionary ile hesaplanan kişiye
+    # en uygun statüyü yazdıran method
     def __str__(self):
         self.statu_bul()
         return f"Ad: {self.get_ad()}\nSoyad: {self.get_soyad()}\nEn Uygun Statü: {self.__statu}"
+    
