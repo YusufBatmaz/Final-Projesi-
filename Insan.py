@@ -1,4 +1,3 @@
-
 class Insan:
     # Initializer metot
     def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk):
@@ -47,7 +46,7 @@ class Insan:
     def set_uyruk(self, uyruk):
         self.__uyruk = uyruk
 
-    #  __str__ metotu ile kullanıcı bilgileri
+    #  __str__ metotu ile kullanıcı bilgileri yazdırılıyor
     def __str__(self):
         return (f"TC Numarası: {self.__tc_no}\nAd: {self.__ad}\nSoyad: {self.__soyad}"
                 f"\nYaş: {self.__yas}\nCinsiyet: {self.__cinsiyet}\nUyruk: {self.__uyruk}")
