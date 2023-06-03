@@ -30,43 +30,34 @@ beyazyaka1 = BeyazYaka(12345678978, "Tyler", "Durden", 42, "Erkek", "Alman", "te
 beyazyaka2 = BeyazYaka(96548712345, "Skyler", "Black", 35, "Kadın", "İngiliz", "muhasabe", 12, 18000, 2500)
 beyazyaka3 = BeyazYaka(15935786278, "Ahmet", "Korkmaz",32, "Erkek", "Türk", "inşaat", 48, 22000, 1000)
 
-print("\n--- İnsan Sınıfının Nesne Bilgileri ---")
-print(insan1)
-print("\n**************************\n")
-print(insan2)
-print("\n**************************\n")
+print(f"\nİnsan Sınıfının Nesne Bilgileri"
+      f"\n\n{insan1}"
+      f"\n\n{insan2}"
+      f"\n\n")
 
-print("\n--- Issiz Sınıfının Nesne Bilgileri ---")
-print(issiz1)
-print("\n**************************\n")
-print(issiz2)
-print("\n**************************\n")
-print(issiz3)
-print("\n**************************\n")
+print(f"\nIssiz Sınıfının Nesne Bilgileri"
+      f"\n\n{issiz1}"
+      f"\n\n{issiz2}"
+      f"\n\n{issiz3}"
+      f"\n\n")
 
-print("\n--- Calisan Sınıfının Nesne Bilgileri ---")
-print(calisan1)
-print("\n**************************\n")
-print(calisan2)
-print("\n**************************\n")
-print(calisan3)
-print("\n**************************\n")
+print(f"\nCalisan Sınıfının Nesne Bilgileri"
+      f"\n\n{calisan1}"
+      f"\n\n{calisan2}"
+      f"\n\n{calisan3}"
+      f"\n\n")
 
-print("\n--- MaviYaka Sınıfının Nesne Bilgileri ---")
-print(maviyaka1)
-print("\n**************************\n")
-print(maviyaka2)
-print("\n**************************\n")
-print(maviyaka3)
-print("\n**************************\n")
+print(f"\nMaviYaka Sınıfının Nesne Bilgileri"
+      f"\n\n{maviyaka1}"
+      f"\n\n{maviyaka2}"
+      f"\n\n{maviyaka3}"
+      f"\n\n")
 
-print("\n--- BeyazYaka Sınıfının Nesne Bilgileri ---")
-print(beyazyaka1)
-print("\n**************************\n")
-print(beyazyaka2)
-print("\n**************************\n")
-print(beyazyaka3)
-print("\n**************************\n")
+print(f"\nBeyazYaka Sınıfının Nesne Bilgileri"
+      f"\n\n{beyazyaka1}"
+      f"\n\n{beyazyaka2}"
+      f"\n\n{beyazyaka3}"
+      f"\n\n")
 
 # DataFrame oluşturma
 data = {
@@ -110,25 +101,51 @@ data = {
               maviyaka1.get_maas(), maviyaka2.get_maas(), maviyaka3.get_maas(),
               beyazyaka1.get_maas(), beyazyaka2.get_maas(), beyazyaka3.get_maas()],
 
-    "Yıpranma Payı": [0, 0, 0, maviyaka1.get_yipranma_payi(),maviyaka2.get_yipranma_payi(),
+    "Yıpranma Payı" : [0, 0, 0, maviyaka1.get_yipranma_payi(),maviyaka2.get_yipranma_payi(),
                       maviyaka3.get_yipranma_payi(), 0, 0, 0],
 
-    "Teşvik Primi": [0, 0, 0, 0, 0, 0, beyazyaka1.get_tesvik_primi(), beyazyaka2.get_tesvik_primi(),
+    "Teşvik Primi" : [0, 0, 0, 0, 0, 0, beyazyaka1.get_tesvik_primi(), beyazyaka2.get_tesvik_primi(),
                      beyazyaka3.get_tesvik_primi()],
 
-    "Yeni Maaş": [int(calisan1.get_yeni_maas()), int(calisan2.get_yeni_maas()), int(calisan3.get_yeni_maas()),
+    "Yeni Maaş" : [int(calisan1.get_yeni_maas()), int(calisan2.get_yeni_maas()), int(calisan3.get_yeni_maas()),
                   int(maviyaka1.get_yeni_maas()), int(maviyaka2.get_yeni_maas()), int(maviyaka3.get_yeni_maas()),
                   int(beyazyaka1.get_yeni_maas()), int(beyazyaka2.get_yeni_maas()), int(beyazyaka3.get_yeni_maas())],
 
 }
 
 df = pd.DataFrame(data)
-
-tecrube_ortalamasi = {"Çalışan": 0, "Mavi Yaka": 0, "Beyaz Yaka": 0}
-yeni_maas_ortalamasi = {"Çalışan": 0, "Mavi Yaka": 0, "Beyaz Yaka": 0}
-kisi_sayisi = {"Çalışan": 0, "Mavi Yaka": 0, "Beyaz Yaka": 0}
+# a-) tecrübe, maaş, kişi sayısı
+calisan_ortalama = [0, 0, 0]
+maviyaka_ortalama = [0, 0, 0]
+beyazyaka_ortalama = [0, 0, 0]
 
 # b-)
+try:
+    for i in range(len(df)):
+        if df.iloc[i, 0] == "Çalışan":
+            calisan_ortalama[0] += df.iloc[i, 8]
+            calisan_ortalama[1] += df.iloc[i, 12]
+            calisan_ortalama[2] += 1
+        elif df.iloc[i, 0] == "Mavi Yaka":
+            maviyaka_ortalama[0] += df.iloc[i, 8]
+            maviyaka_ortalama[1] += df.iloc[i, 12]
+            maviyaka_ortalama[2] += 1
+        elif df.iloc[i, 0] == "Beyaz Yaka":
+            beyazyaka_ortalama[0] += df.iloc[i, 8]
+            beyazyaka_ortalama[1] += df.iloc[i, 12]
+            beyazyaka_ortalama[2] += 1
+
+    print(f"\n\nÇalışkan Statülü Bireyler"
+          f"\nTecrübe Ortalaması= {calisan_ortalama[0] / calisan_ortalama[2]}"
+          f"\nYeni Maaş Ortalaması = {calisan_ortalama[1] / calisan_ortalama[2]}")
+    print(f"\n\nMavi Yaka Statülü Bireyler"
+          f"\nTecrübe Ortalaması= {maviyaka_ortalama[0] / maviyaka_ortalama[2]}" 
+          f"\nYeni Maaş Ortalaması = {maviyaka_ortalama[1] / maviyaka_ortalama[2]}")
+    print(f"\n\nBeyaz Yaka Statülü Bireyler"
+          f"\nTecrübe Ortalaması= {beyazyaka_ortalama[0] / beyazyaka_ortalama[2]}"
+          f"\nYeni Maaş Ortalaması = {beyazyaka_ortalama[1] / beyazyaka_ortalama[2]}")
+except Exception as e:
+    print(f"Hata!\nAçıklama: {e}")
 
 
 # c-)
@@ -138,32 +155,26 @@ try:
         if df.iloc[i, 9] > 15000:
             k15_uzeri_alan_sayisi += 1
     print(f"\n\nMaaşı 15000TL Üzeri Olan Kişi Sayısı = {k15_uzeri_alan_sayisi}")
-except Exception as exception:
-    print(f"HATA = {exception}")
+except Exception as e:
+    print(f"Hata!\nAçıklama: {e}")
 
 # d-)
 try:
-    siralanmis_df = df.sort_values("Yeni Maaş", )
+    siralanmis_df = df.sort_values("Yeni Maaş")
     print("\n\nDataframe'de Yeni Maaş Değerlerinin Küçükten Büyüğe Sıralanmış Hali\n")
     print(siralanmis_df.to_string())
-except Exception as exception:
-    print(f"HATA = {exception}")
+except Exception as e:
+    print(f"Hata!\nAçıklama: {e}")
 
 # e-)
-uc_sene_ustu_beyazyaka = []
 try:
+    print("\n\nTecrübesi 3 Seneden Fazla Olan Beyaz Yakalılar")
     for j in range(len(df)):
         if df.iloc[j, 8] > 3 and df.iloc[j, 0] == "Beyaz Yaka":
-            uc_sene_ustu_beyazyaka.append(j)
-    print("\n\nTecrübesi 3 Seneden Fazla Olan Beyaz Yakalılar")
-    line = 1
-    for i in uc_sene_ustu_beyazyaka:
-        print(f"{line}. "
-                f"{df.loc[i][2]} "
-                f"{df.loc[i][3]}")
-        line += 1
-except Exception as exception:
-    print(f"HATA = {exception}")
+            print(f"{df.loc[j][2]}"
+                  f" {df.loc[j][3]}")
+except Exception as e:
+    print(f"Hata!\nAçıklama: {e}")
 
 
 # f-)
@@ -171,11 +182,10 @@ print("\n\n2-5 Satır Aralığında Yeni Maaşı 10000TL Üzeri Olanlar")
 try:
     for k in range(len(df)):
         if df.iloc[k, 12] > 10000 and 2 <= k <= 5:
-            bilgiler = df.iloc[k, 1:13:11]
-            print(f"Sıra Numarası = {k}\n"
-                  f"{bilgiler.to_string()}\n")
-except Exception as exception:
-    print(f"HATA = {exception}")
+            kisiler = df.iloc[k, 1:13:11]
+            print(f"{kisiler.to_string()}\n")
+except Exception as e:
+    print(f"Hata!\nAçıklama: {e}")
 
 
 # g-)
@@ -183,12 +193,5 @@ print("\n\nYeni DataFrame(Ad-Soyad-Sektör-Yeni Maaş Bilgilerini İçerir)")
 try:
     dataframe_new = df[["Ad", "Soyad", "Sektör", "Yeni Maaş"]].copy()
     print(dataframe_new.to_string())
-except Exception as exception:
-    print(f"HATA = {exception}")
-
-
-
-
-
-
-
+except Exception as e:
+    print(f"Hata!\nAçıklama: {e}")
