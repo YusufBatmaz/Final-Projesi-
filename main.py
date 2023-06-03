@@ -30,6 +30,7 @@ beyazyaka1 = BeyazYaka(12345678978, "Tyler", "Durden", 42, "Erkek", "Alman", "te
 beyazyaka2 = BeyazYaka(96548712345, "Skyler", "Black", 35, "Kadın", "İngiliz", "muhasabe", 12, 18000, 2500)
 beyazyaka3 = BeyazYaka(15935786278, "Ahmet", "Korkmaz",32, "Erkek", "Türk", "inşaat", 48, 22000, 1000)
 
+# Nesne bilgileri yazdırılan kısım
 print(f"\nİnsan Sınıfının Nesne Bilgileri"
       f"\n\n{insan1}"
       f"\n\n{insan2}"
@@ -90,8 +91,8 @@ data = {
                beyazyaka1.get_uyruk(), beyazyaka2.get_uyruk(), beyazyaka3.get_uyruk()],
 
     "Sektör" : [calisan1.get_sektor(), calisan2.get_sektor(), calisan3.get_sektor(),
-               maviyaka1.get_sektor(), maviyaka2.get_sektor(), maviyaka3.get_sektor(),
-               beyazyaka1.get_sektor(), beyazyaka2.get_sektor(), beyazyaka3.get_sektor()],
+                maviyaka1.get_sektor(), maviyaka2.get_sektor(), maviyaka3.get_sektor(),
+                beyazyaka1.get_sektor(), beyazyaka2.get_sektor(), beyazyaka3.get_sektor()],
 
     "Tecrübe" : [int(calisan1.get_tecrube()/12), int(calisan2.get_tecrube()/12), int(calisan3.get_tecrube()/12),
                  int(maviyaka1.get_tecrube()/12), int(maviyaka2.get_tecrube()/12), int(maviyaka3.get_tecrube()/12),
@@ -101,25 +102,25 @@ data = {
               maviyaka1.get_maas(), maviyaka2.get_maas(), maviyaka3.get_maas(),
               beyazyaka1.get_maas(), beyazyaka2.get_maas(), beyazyaka3.get_maas()],
 
-    "Yıpranma Payı" : [0, 0, 0, maviyaka1.get_yipranma_payi(),maviyaka2.get_yipranma_payi(),
-                      maviyaka3.get_yipranma_payi(), 0, 0, 0],
+    "Yıpranma Payı" : [0, 0, 0, maviyaka1.get_yipranma_payi(), maviyaka2.get_yipranma_payi(),
+                       maviyaka3.get_yipranma_payi(), 0, 0, 0],
 
     "Teşvik Primi" : [0, 0, 0, 0, 0, 0, beyazyaka1.get_tesvik_primi(), beyazyaka2.get_tesvik_primi(),
-                     beyazyaka3.get_tesvik_primi()],
+                      beyazyaka3.get_tesvik_primi()],
 
     "Yeni Maaş" : [int(calisan1.get_yeni_maas()), int(calisan2.get_yeni_maas()), int(calisan3.get_yeni_maas()),
-                  int(maviyaka1.get_yeni_maas()), int(maviyaka2.get_yeni_maas()), int(maviyaka3.get_yeni_maas()),
-                  int(beyazyaka1.get_yeni_maas()), int(beyazyaka2.get_yeni_maas()), int(beyazyaka3.get_yeni_maas())],
+                   int(maviyaka1.get_yeni_maas()), int(maviyaka2.get_yeni_maas()), int(maviyaka3.get_yeni_maas()),
+                   int(beyazyaka1.get_yeni_maas()), int(beyazyaka2.get_yeni_maas()), int(beyazyaka3.get_yeni_maas())],
 
 }
 
 df = pd.DataFrame(data)
-# a-) tecrübe, maaş, kişi sayısı
+
 calisan_ortalama = [0, 0, 0]
 maviyaka_ortalama = [0, 0, 0]
 beyazyaka_ortalama = [0, 0, 0]
 
-# b-)
+# Her statüdeki bireylerin tecrübe ortalamasını ve yeni maaş ortalamasını yazdıran kısım
 try:
     for i in range(len(df)):
         if df.iloc[i, 0] == "Çalışan":
@@ -148,7 +149,7 @@ except Exception as e:
     print(f"Hata!\nAçıklama: {e}")
 
 
-# c-)
+# c-)Maaşı 15000TL üzerinde olanların toplam sayısını bulan kısım
 k15_uzeri_alan_sayisi = 0
 try:
     for i in range(len(df)):
@@ -158,7 +159,7 @@ try:
 except Exception as e:
     print(f"Hata!\nAçıklama: {e}")
 
-# d-)
+# d-) Yeni maaşa göre DataFrame’i küçükten büyüğe sıralayan ve yazdıran kısım
 try:
     siralanmis_df = df.sort_values("Yeni Maaş")
     print("\n\nDataframe'de Yeni Maaş Değerlerinin Küçükten Büyüğe Sıralanmış Hali\n")
@@ -166,7 +167,7 @@ try:
 except Exception as e:
     print(f"Hata!\nAçıklama: {e}")
 
-# e-)
+# e-)Tecrübesi 3 seneden fazla olan Beyaz yakalıları bulan ve yazdıran kısım
 try:
     print("\n\nTecrübesi 3 Seneden Fazla Olan Beyaz Yakalılar")
     for j in range(len(df)):
@@ -177,7 +178,8 @@ except Exception as e:
     print(f"Hata!\nAçıklama: {e}")
 
 
-# f-)
+# f-)Yeni maaşı 10000 TL üzerinde olanlar için; 2-5 satır arası olanları, tc_no ve yeni_maaş
+# sütunlarını seçerek gösteren ve yazdıran kısım
 print("\n\n2-5 Satır Aralığında Yeni Maaşı 10000TL Üzeri Olanlar")
 try:
     for k in range(len(df)):
@@ -188,7 +190,8 @@ except Exception as e:
     print(f"Hata!\nAçıklama: {e}")
 
 
-# g-)
+# g-)Var olan DataFrame’den ad, soyad, sektör ve yeni maaşı içeren yeni bir DataFrame
+# elde eden ve yazdıran kısım
 print("\n\nYeni DataFrame(Ad-Soyad-Sektör-Yeni Maaş Bilgilerini İçerir)")
 try:
     dataframe_new = df[["Ad", "Soyad", "Sektör", "Yeni Maaş"]].copy()
